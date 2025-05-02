@@ -28,6 +28,7 @@ public class Ball : MonoBehaviour
 	public ParticleSystem parts;
 
 	public ParticleSystem chargepart;
+	public ParticleSystem die;
 
 	public AudioLowPassFilter filter;
 
@@ -70,6 +71,8 @@ public class Ball : MonoBehaviour
 			invtimer--;
 		}
 		if(Input.GetKey("r") && invtimer <= 0){
+			die.Play();
+			this.transform.parent = null;
 			invtimer = 15;
 			transform.position = Globals.me.points[Globals.me.checkpoint - 1].position;
 			Globals.me.checkpoints[Globals.me.checkpoint - 1].replaceLevel();
@@ -101,6 +104,8 @@ public class Ball : MonoBehaviour
 				chargepart.Stop();
 			}*/
 			if(fuel <= 0 && invtimer <= 0){
+				die.Play();
+				this.transform.parent = null;
 				invtimer = 5;
 				transform.position = Globals.me.points[Globals.me.checkpoint - 1].position;
 				Globals.me.checkpoints[Globals.me.checkpoint - 1].replaceLevel();
@@ -168,6 +173,8 @@ public class Ball : MonoBehaviour
 			Platform collided = collision.gameObject.GetComponent<Platform>();
 			collided.health -= (int)rb.velocity.magnitude * 25;
 		} else if(collision.gameObject.name.Equals("Death") && invtimer <= 0){
+			die.Play();
+			this.transform.parent = null;
 			invtimer = 5;
 			transform.position = Globals.me.points[Globals.me.checkpoint - 1].position;
 			Globals.me.checkpoints[Globals.me.checkpoint - 1].replaceLevel();
