@@ -120,6 +120,7 @@ public class Ball : MonoBehaviour
     }
 
 	public void PlInput(){
+		if(!PauseMenu.Paused){
 		if(!grounded){ return;} 
 		
 
@@ -134,6 +135,7 @@ public class Ball : MonoBehaviour
 		}
 		if(Input.GetMouseButtonUp(0) && dragging){
 			DragEnd(inputPos);
+		}
 		}
 	}
 
