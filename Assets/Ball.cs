@@ -62,6 +62,8 @@ public class Ball : MonoBehaviour
     void Update()
     {
 		//thing.connectedBody = platform;
+		transform.localRotation  = Quaternion.identity;
+		//transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 		if (njk) {
 			Debug.Log (PlayerPrefs.GetInt ("Checkpoint") - 1);
 			transform.position = Globals.me.points[PlayerPrefs.GetInt ("Checkpoint") - 1].position;
@@ -229,6 +231,7 @@ public class Ball : MonoBehaviour
 	}
 		if(col.Length == 0){
 			this.transform.parent = null;
+			transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 		}
 	}
 }
