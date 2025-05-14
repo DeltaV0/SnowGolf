@@ -36,7 +36,9 @@ public class Ball : MonoBehaviour
 
 	public AudioSource jump;
 
-	public int invtimer;
+    public AudioSource deathsfx;
+
+    public int invtimer;
 
 	public bool njk;
 	//public List<Platform> Colliding = new List<Platform>();
@@ -58,6 +60,18 @@ public class Ball : MonoBehaviour
 		//rb.velocity = Vector2.ClampMagnitude(dir * 5, maxPower);
     }
 
+	void Die() {
+        deathsfx.Play();
+        Globals.me.ResetAll();
+        die.Play();
+        this.transform.parent = null;
+        invtimer = 15;
+        transform.position = Globals.me.points[Globals.me.checkpoint - 1].position;
+        Globals.me.checkpoints[Globals.me.checkpoint - 1].replaceLevel();
+        Globals.me.checkpoints[Globals.me.checkpoint - 1].refuel(this);
+        rb.velocity = new Vector2(0, 0);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -73,13 +87,7 @@ public class Ball : MonoBehaviour
 			invtimer--;
 		}
 		if(Input.GetKey("r") && invtimer <= 0){
-			die.Play();
-			this.transform.parent = null;
-			invtimer = 15;
-			transform.position = Globals.me.points[Globals.me.checkpoint - 1].position;
-			Globals.me.checkpoints[Globals.me.checkpoint - 1].replaceLevel();
-			Globals.me.checkpoints[Globals.me.checkpoint - 1].refuel(this);
-			rb.velocity = new Vector2(0, 0);
+			Die();
 		}
 		if(!Globals.me.stop){
 		PlInput();
@@ -106,15 +114,9 @@ public class Ball : MonoBehaviour
 				chargepart.Stop();
 			}*/
 			if(fuel <= 0 && invtimer <= 0){
-				die.Play();
-				this.transform.parent = null;
-				invtimer = 5;
-				transform.position = Globals.me.points[Globals.me.checkpoint - 1].position;
-				Globals.me.checkpoints[Globals.me.checkpoint - 1].replaceLevel();
-				Globals.me.checkpoints[Globals.me.checkpoint - 1].refuel(this);
-				rb.velocity = new Vector2(0, 0);
+                Die();
 
-			}
+            }
 		}
 		fuelLeft.fillAmount = (float)fuel / maxfuel;
     }
@@ -177,14 +179,8 @@ public class Ball : MonoBehaviour
 			Platform collided = collision.gameObject.GetComponent<Platform>();
 			collided.health -= (int)rb.velocity.magnitude * 25;
 		} else if(collision.gameObject.name.Equals("Death") && invtimer <= 0){
-			die.Play();
-			this.transform.parent = null;
-			invtimer = 5;
-			transform.position = Globals.me.points[Globals.me.checkpoint - 1].position;
-			Globals.me.checkpoints[Globals.me.checkpoint - 1].replaceLevel();
-			Globals.me.checkpoints[Globals.me.checkpoint - 1].refuel(this);
-			rb.velocity = new Vector2(0, 0);
-		}// else if(collision.gameObject.name.Equals("Dynamic")){
+            Die();
+        }// else if(collision.gameObject.name.Equals("Dynamic")){
 			//this.transform.parent = collision.transform.root;
 		//}
 	}
@@ -195,7 +191,12 @@ public class Ball : MonoBehaviour
 		//}
 	}
 
+	public void FindParent(string name) {
+		while (this.transform.parent.name != name) {
+			this.transform.parent = this.transform.parent.parent;
 
+        }
+	}
 
 	private void FixedUpdate(){
 

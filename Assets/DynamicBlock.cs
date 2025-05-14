@@ -9,13 +9,19 @@ public class DynamicBlock : MonoBehaviour
 
 	public int[] Functions;
 
-	public int[] Vars;
+	public float[] Vars;
+
+	public Vector3 origPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+		origPos = transform.position;
     }
+
+	public void Reset() { 
+	transform.position = origPos;
+	}
 
     // Update is called once per frame
     void FixedUpdate()

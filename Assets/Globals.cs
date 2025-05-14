@@ -8,6 +8,8 @@ public class Globals : MonoBehaviour
 
 	public Checkpoint[] checkpoints;
 
+	public DynamicBlock[] dynamicstuff;
+
 	public static Globals me;
 
 	public int checkpoint;
@@ -31,6 +33,14 @@ public class Globals : MonoBehaviour
 		}
 		checkpoint = PlayerPrefs.GetInt ("Checkpoint");
 		me = this;
+
+    }
+
+	public void ResetAll() {
+		for (int i = 0; i < dynamicstuff.Length; i++) {
+			dynamicstuff[i].Reset();
+
+        }
 
     }
 
