@@ -94,6 +94,7 @@ public class Ball : MonoBehaviour
 		if(dragging){
 				if(!PauseMenu.Paused){
 			Time.timeScale = Mathf.Lerp(Time.timeScale, 0.05f, 0.03f);
+			Globals.me.WarpSpeed = Mathf.Lerp(Globals.me.WarpSpeed, 0.05f, 0.03f);
 				}
 			//filter.cutoffFrequency = Mathf.Lerp(filter.cutoffFrequency, 200f, 0.03f);
 				music[0].pitch = Mathf.Lerp(music[0].pitch, 0.8f, 0.03f);
@@ -101,6 +102,7 @@ public class Ball : MonoBehaviour
 		} else {
 				if(!PauseMenu.Paused){
 			Time.timeScale = Mathf.Lerp(Time.timeScale, 1f, 0.1f);
+			Globals.me.WarpSpeed = Mathf.Lerp(Globals.me.WarpSpeed, 1f, 0.03f);
 				}
 			//filter.cutoffFrequency = Mathf.Lerp(filter.cutoffFrequency, 22000f, 0.1f);
 				music[0].pitch = Mathf.Lerp(music[0].pitch, 1f, 0.1f);

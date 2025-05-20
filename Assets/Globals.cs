@@ -9,6 +9,9 @@ public class Globals : MonoBehaviour
 	public Checkpoint[] checkpoints;
 
 	public DynamicBlock[] dynamicstuff;
+	public button[] buttons;
+
+	public float WarpSpeed;
 
 	public static Globals me;
 
@@ -27,6 +30,7 @@ public class Globals : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		WarpSpeed = 1f;
 		stop = false;
 		if (PlayerPrefs.GetInt ("Checkpoint") == 0) {
 			PlayerPrefs.SetInt("Checkpoint", 1);
@@ -39,6 +43,11 @@ public class Globals : MonoBehaviour
 	public void ResetAll() {
 		for (int i = 0; i < dynamicstuff.Length; i++) {
 			dynamicstuff[i].Reset();
+
+        }
+		for (int i = 0; i < buttons.Length; i++) {
+			buttons[i].Pressed = false;
+			buttons[i].a = true;
 
         }
 
