@@ -92,7 +92,7 @@ public class Ball : MonoBehaviour
 			Die();
 		}
 		if(Input.GetKey("p") && invtimer <= 0){
-			if(Globals.me.checkpoint < 12 ){
+			if(Globals.me.checkpoint < 13 ){
 			Globals.me.checkpoint++;
 			} else {
 				Globals.me.checkpoint = 1;
