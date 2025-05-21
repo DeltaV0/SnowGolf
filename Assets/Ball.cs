@@ -41,6 +41,8 @@ public class Ball : MonoBehaviour
     public int invtimer;
 
 	public bool njk;
+
+	public GameObject currentParent;
 	//public List<Platform> Colliding = new List<Platform>();
     // Start is called before the first frame update
     void Start()
@@ -87,6 +89,14 @@ public class Ball : MonoBehaviour
 			invtimer--;
 		}
 		if(Input.GetKey("r") && invtimer <= 0){
+			Die();
+		}
+		if(Input.GetKey("p") && invtimer <= 0){
+			if(Globals.me.checkpoint < 12 ){
+			Globals.me.checkpoint++;
+			} else {
+				Globals.me.checkpoint = 1;
+			}
 			Die();
 		}
 		if(!Globals.me.stop){
@@ -214,27 +224,52 @@ public class Ball : MonoBehaviour
 	if(col.Length > 0){
 		for(int i = 0; i < col.Length; i++){
 			if(col[i].name.Equals("Platform")){
-					this.transform.parent = col[i].transform.root;
+					if(currentParent == null || Vector3.Distance(transform.position, col[i].transform.position) < Vector3.Distance(transform.position, currentParent.transform.position)){
+						currentParent = col[i].transform.gameObject;
+						this.transform.parent = col[i].transform.root;
+					}
 					grounded = true;
 				}  else if(col[i].name.Equals("Steel")){
-					this.transform.parent = col[i].transform.root;
+					if(currentParent == null || Vector3.Distance(transform.position, col[i].transform.position) < Vector3.Distance(transform.position, currentParent.transform.position)){
+						currentParent = col[i].transform.gameObject;
+						this.transform.parent = col[i].transform.root;
+					}
 					grounded = true;
 				} else if(col[i].name.Equals("Checkpoint")){
-					this.transform.parent = col[i].transform.root;
+					if(currentParent == null || Vector3.Distance(transform.position, col[i].transform.position) < Vector3.Distance(transform.position, currentParent.transform.position)){
+						currentParent = col[i].transform.gameObject;
+						this.transform.parent = col[i].transform.root;
+					}
 					grounded = true;
 				} else if(col[i].name.Equals("Boost")){
-					this.transform.parent = col[i].transform.root;
+					if(currentParent == null || Vector3.Distance(transform.position, col[i].transform.position) < Vector3.Distance(transform.position, currentParent.transform.position)){
+						currentParent = col[i].transform.gameObject;
+						this.transform.parent = col[i].transform.root;
+					}
 					grounded = true;
 				} else if(col[i].name.Equals("Dynamic")){
-					this.transform.parent = col[i].transform.root;
+					if(currentParent == null || Vector3.Distance(transform.position, col[i].transform.position) < Vector3.Distance(transform.position, currentParent.transform.position)){
+						currentParent = col[i].transform.gameObject;
+						this.transform.parent = col[i].transform.root;
+					}
 					grounded = true;
 				} else if(col[i].name.Equals("Button")){
-					this.transform.parent = col[i].transform.root;
+					if(currentParent == null || Vector3.Distance(transform.position, col[i].transform.position) < Vector3.Distance(transform.position, currentParent.transform.position)){
+						currentParent = col[i].transform.gameObject;
+						this.transform.parent = col[i].transform.root;
+					}
+					grounded = true;
+				} else if(col[i].name.Equals("Bouncy")){
+					if(currentParent == null || Vector3.Distance(transform.position, col[i].transform.position) < Vector3.Distance(transform.position, currentParent.transform.position)){
+						currentParent = col[i].transform.gameObject;
+						this.transform.parent = col[i].transform.root;
+					}
 					grounded = true;
 				}
 		}
 	}
 		if(col.Length == 0){
+			currentParent = null;
 			this.transform.parent = null;
 			transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 		}

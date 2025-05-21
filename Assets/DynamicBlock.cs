@@ -11,6 +11,8 @@ public class DynamicBlock : MonoBehaviour
 
 	public float[] Vars;
 
+	public bool[] boolvars;
+
 	public Vector3 origPos;
 
 
@@ -63,8 +65,19 @@ public class DynamicBlock : MonoBehaviour
 			//transform.Translate(new Vector3(-0.025f, 0, 0));
 			break;
 		case 2:
-			if(transform.position.y <= Vars[0]){
-				transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed, 0));
+			if(!boolvars[0]){
+				if(transform.position.y <= Vars[0]){
+					transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed, 0));
+				}
+			} else {
+				if(transform.position.y >= Vars[0]){
+					transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed, 0));
+				}
+			}
+			break;
+		case 3:
+			if(transform.position.y >= Vars[0]){
+				transform.Translate(new Vector3(0, -0.1f * Globals.me.WarpSpeed, 0));
 			}
 			break;
 
