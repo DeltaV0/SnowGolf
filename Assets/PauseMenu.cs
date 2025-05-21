@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
 	//public float[] 
 
 	void Start(){
-		Resume ();
+		Startup ();
 		if(PlayerPrefs.GetInt("INIT") == 0){
 			PlayerPrefs.SetInt("INIT", 1);
 			PlayerPrefs.SetFloat("Volume", 0.75f);
@@ -54,7 +54,16 @@ public class PauseMenu : MonoBehaviour
 		}
 		voltext.text = (int)(PlayerPrefs.GetFloat("Volume") * 100) + "%";
     }
-
+	public void Startup(){
+		//audio2[1].Play();
+		for(int i = 0; i < audio.Length; i++){
+			audio[i].UnPause();
+		}
+		UI.SetActive(false);
+		Time.timeScale = 1f;
+		Paused = false;
+		PlayerPrefs.Save();
+	}
 	public void Resume(){
 		audio2[1].Play();
 		for(int i = 0; i < audio.Length; i++){
