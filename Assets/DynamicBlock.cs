@@ -9,6 +9,8 @@ public class DynamicBlock : MonoBehaviour
 
 	public int[] Functions;
 
+	public int[] UnpressedFunctions;
+
 	public float[] Vars;
 
 	public bool[] boolvars;
@@ -47,6 +49,8 @@ public class DynamicBlock : MonoBehaviour
 		for(int i = 0; i<Buttons.Length; i++)
 		if(Buttons[i].Pressed){
 			Run (Functions[i]);
+		} else {
+			Run (UnpressedFunctions[i]);
 		}
 		}
     }
@@ -76,8 +80,14 @@ public class DynamicBlock : MonoBehaviour
 			}
 			break;
 		case 3:
-			if(transform.position.y >= Vars[0]){
-				transform.Translate(new Vector3(0, -0.1f * Globals.me.WarpSpeed, 0));
+			if(!boolvars[0]){
+				if(transform.position.y >= Vars[1]){
+					transform.Translate(new Vector3(0, -0.1f * Globals.me.WarpSpeed, 0));
+				}
+			} else {
+				if(transform.position.y <= Vars[1]){
+					transform.Translate(new Vector3(0, -0.1f * Globals.me.WarpSpeed, 0));
+				}
 			}
 			break;
 
