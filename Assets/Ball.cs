@@ -92,7 +92,7 @@ public class Ball : MonoBehaviour
 			Die();
 		}
 		if(Input.GetKey("p") && invtimer <= 0){
-			if(Globals.me.checkpoint < 14 ){
+			if(Globals.me.checkpoint < 15 ){
 			Globals.me.checkpoint++;
 			} else {
 				Globals.me.checkpoint = 1;
@@ -250,7 +250,7 @@ public class Ball : MonoBehaviour
 				} else if(col[i].name.Equals("Dynamic")){
 					if(currentParent == null || Vector3.Distance(transform.position, col[i].transform.position) < Vector3.Distance(transform.position, currentParent.transform.position)){
 						currentParent = col[i].transform.gameObject;
-						this.transform.parent = col[i].transform.root;
+						this.transform.parent = col[i].transform;
 					}
 					grounded = true;
 				} else if(col[i].name.Equals("Button")){
