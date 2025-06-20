@@ -40,6 +40,7 @@ public class button : MonoBehaviour
         {
           timer = 50;
           Pressed = true;
+          Globals.me.beep(0);
           a = false;
         }
         if (buttonTransform.localPosition.y <= -0.05f)
@@ -50,6 +51,7 @@ public class button : MonoBehaviour
         {
           timer = 50;
           Pressed = false;
+          Globals.me.beep(1);
           a = false;
         }
       }
@@ -61,7 +63,12 @@ public class button : MonoBehaviour
         Pressed = !inputs[0].Pressed;
       } else if (type == 1)
       {
-        Pressed = inputs[0].Pressed && inputs[1].Pressed;
+        Pressed = true;
+                for (int i = 0; i < inputs.Length; i++) {
+                    if (!inputs[i].Pressed) {
+                        Pressed = false;
+                    }
+                }
       }
     }
     }

@@ -26,7 +26,9 @@ public class Globals : MonoBehaviour
 
 	public AudioSource Shatter;
 
-	public Animator anim;
+    public AudioSource[] beeps;
+
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,4 +66,9 @@ public class Globals : MonoBehaviour
 		Shatter.pitch = Random.Range(0.8f, 1.2f);
 			Shatter.Play();
 	}
+
+    public void beep(int i)
+    {
+		beeps[i].Play();
+    }
 }

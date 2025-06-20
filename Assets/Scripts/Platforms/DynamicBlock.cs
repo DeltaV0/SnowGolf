@@ -17,6 +17,8 @@ public class DynamicBlock : MonoBehaviour
 
 	public Vector3 origPos;
 
+	public float speed = 1;
+
 
 	//public bool resetting;
 
@@ -59,34 +61,45 @@ public class DynamicBlock : MonoBehaviour
 		switch(num){
 		case 0:
 			if(transform.position.x >= Vars[0]){
-			transform.Translate(new Vector3(0.05f * Globals.me.WarpSpeed, 0, 0));
+			transform.Translate(new Vector3(0.05f * Globals.me.WarpSpeed * speed, 0, 0));
 			}
 			break;
 		case 1:
 			if(transform.position.x <= Vars[1]){
-				transform.Translate(new Vector3(-0.05f * Globals.me.WarpSpeed, 0, 0));
+				transform.Translate(new Vector3(-0.05f * Globals.me.WarpSpeed * speed, 0, 0));
 			}
 			//transform.Translate(new Vector3(-0.025f, 0, 0));
 			break;
 		case 2:
 			if(!boolvars[0]){
 				if(transform.position.y <= Vars[0]){
-					transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed, 0));
+					transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed * speed, 0));
 				}
 			} else {
 				if(transform.position.y >= Vars[0]){
-					transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed, 0));
+					transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed * speed, 0));
 				}
 			}
 			break;
 		case 3:
 			if(!boolvars[0]){
 				if(transform.position.y >= Vars[1]){
-					transform.Translate(new Vector3(0, -0.1f * Globals.me.WarpSpeed, 0));
+					transform.Translate(new Vector3(0, -0.1f * Globals.me.WarpSpeed * speed, 0));
 				}
 			} else {
 				if(transform.position.y <= Vars[1]){
-					transform.Translate(new Vector3(0, -0.1f * Globals.me.WarpSpeed, 0));
+					transform.Translate(new Vector3(0, -0.1f * Globals.me.WarpSpeed * speed, 0));
+				}
+			}
+			break;
+		case 4:
+			if(!boolvars[0]){
+				if(transform.position.x <= Vars[0]){
+					transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed * speed, 0));
+				}
+			} else {
+				if(transform.position.x >= Vars[0]){
+					transform.Translate(new Vector3(0, 0.1f * Globals.me.WarpSpeed * speed, 0));
 				}
 			}
 			break;

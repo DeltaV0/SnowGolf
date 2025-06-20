@@ -6,7 +6,9 @@ public class RandomMusic : MonoBehaviour
 {
 	public AudioClip[] music;
 
-	public AudioSource src;
+    public AudioClip[] music2;
+
+    public AudioSource src;
     // Start is called before the first frame update
     void Start()
     {

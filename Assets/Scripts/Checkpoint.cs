@@ -68,6 +68,10 @@ public class Checkpoint : MonoBehaviour
 			collision.gameObject.GetComponent<Ball>().fuel = (float)fuelrefill;
 			collision.gameObject.GetComponent<Ball>().maxfuel = (float)fuelrefill;
 			part.Play();
+				if (Globals.me.checkpoint != ID) {
+					Globals.me.beep(2);
+
+                }
 			Globals.me.checkpoint = ID;
 			PlayerPrefs.SetInt("Checkpoint", ID);
 			PlayerPrefs.Save();

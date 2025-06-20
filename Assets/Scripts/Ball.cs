@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Ball : MonoBehaviour
 {
@@ -38,11 +39,19 @@ public class Ball : MonoBehaviour
 
     public AudioSource deathsfx;
 
+    public AudioSource[] landsfx;
+
+    public AudioSource WindFast;
+
     public int invtimer;
 
 	public bool njk;
 
 	public GameObject currentParent;
+
+	public Animator DeathCounter;
+
+	public TMP_Text deathtext;
 	//public List<Platform> Colliding = new List<Platform>();
     // Start is called before the first frame update
     void Start()
@@ -59,6 +68,9 @@ public class Ball : MonoBehaviour
     }
 
 	void Die() {
+		DeathCounter.SetTrigger("Die");
+        PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
+        deathtext.text = PlayerPrefs.GetInt("Deaths") + "";
         deathsfx.Play();
         Globals.me.ResetAll();
         die.Play();
@@ -73,8 +85,9 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		//thing.connectedBody = platform;
-		transform.localRotation  = Quaternion.identity;
+		WindFast.volume = Mathf.Clamp(rb.velocity.magnitude * 0.01f * PlayerPrefs.GetFloat("Volume"), 0f, 1f * PlayerPrefs.GetFloat("Volume"));
+        //thing.connectedBody = platform;
+        transform.localRotation  = Quaternion.identity;
 		//transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 		if (njk) {
 			Debug.Log (PlayerPrefs.GetInt ("Checkpoint") - 1);
@@ -174,10 +187,18 @@ public class Ball : MonoBehaviour
 		if(collision.gameObject.name.Equals("Platform") && rb.velocity.magnitude > 0.5f){
 			Platform collided = collision.gameObject.GetComponent<Platform>();
 			collided.health -= (int)rb.velocity.magnitude * 25;
-		} else if(collision.gameObject.name.Equals("Death") && invtimer <= 0){
+            landsfx[0].pitch = Random.Range(0.5f, 0.9f);
+            landsfx[0].Play();
+
+        } else if(collision.gameObject.name.Equals("Death") && invtimer <= 0){
             Die();
         }
-	}
+        else if ((collision.gameObject.name.Equals("Steel") || collision.gameObject.name.Equals("Dynamic")) && invtimer <= 0)
+        {
+            landsfx[1].pitch = Random.Range(0.5f, 0.9f);
+            landsfx[1].Play();
+        }
+    }
 
 	public void FindParent(string name) {
 		while (this.transform.parent.name != name) {
@@ -199,8 +220,11 @@ public class Ball : MonoBehaviour
 		if(grounded){
 					chargepart.Play();
 			}
+		//???
+		//if (DeathCounter.active) {
+			//DeathCounter.SetActive(false);
 
-
+       // }
 		fuel -= Time.timeScale;
 		LayerMask layermask;
 		layermask = LayerMask.GetMask("Default");

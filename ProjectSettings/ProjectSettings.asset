@@ -620,7 +620,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: SnowGolf
-  metroPackageVersion: 
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -628,7 +628,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: SnowGolf
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Dash with the Fireball on the Ice Walls
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
