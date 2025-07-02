@@ -34,4 +34,14 @@ public class Buttons : MonoBehaviour
 	public void menu(){
 		SceneManager.LoadSceneAsync("Title");
 	}
+
+	public void menuWiped(){
+		float v1 = PlayerPrefs.GetFloat("Volume");
+		int v2 = PlayerPrefs.GetInt("INIT");
+		PlayerPrefs.DeleteAll();
+		PlayerPrefs.SetFloat("Volume", v1);
+		PlayerPrefs.SetInt("INIT", v2);
+		PlayerPrefs.Save();
+		SceneManager.LoadSceneAsync("Title");
+	}
 }

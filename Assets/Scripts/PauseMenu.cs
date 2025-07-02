@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,8 +8,11 @@ using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
+	public Volume volume;
 	public TMP_Text voltext;
     public TMP_Text vol2text;
+
+	public Toggle toggle;
 
     public Slider vol;
     public Slider vol2;
@@ -27,6 +31,7 @@ public class PauseMenu : MonoBehaviour
 
 	//public float[] 
 
+
 	void Start(){
 		Startup ();
 		if(PlayerPrefs.GetInt("INIT") == 0){
@@ -38,6 +43,14 @@ public class PauseMenu : MonoBehaviour
 		vol.value = PlayerPrefs.GetFloat("Volume");
         vol2.value = PlayerPrefs.GetFloat("VolumeMus");
     }
+
+	public void ChangePost(){
+		if(!toggle.isOn){
+			volume.weight = 1;
+		} else {
+			volume.weight = 0;
+		}
+	}
 
 	public void ChangeVol(){
 		PlayerPrefs.SetFloat("Volume", vol.value);

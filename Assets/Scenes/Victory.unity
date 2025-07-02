@@ -5444,7 +5444,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1586379518}
         m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
-        m_MethodName: menu
+        m_MethodName: menuWiped
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

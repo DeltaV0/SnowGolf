@@ -101,7 +101,8 @@ public class Ball : MonoBehaviour
 			Die();
 		}
 		if(Input.GetKey("p") && invtimer <= 0){
-			if(Globals.me.checkpoint < 16 ){
+			//undo this when testing             ^^^^^
+			if(Globals.me.checkpoint < Globals.me.checkpoints.Length ){
 			Globals.me.checkpoint++;
 			} else {
 				Globals.me.checkpoint = 1;

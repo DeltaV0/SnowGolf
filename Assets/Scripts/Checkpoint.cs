@@ -76,7 +76,9 @@ public class Checkpoint : MonoBehaviour
 			PlayerPrefs.SetInt("Checkpoint", ID);
 			PlayerPrefs.Save();
 			} else {
-				Globals.me.anim.SetTrigger("Victory");
+				//Globals.me.anim.SetTrigger("Victory");
+				//WHY WAS THIS IN?
+				//also why didnt i catch this earlier???
 				Invoke("win", 0f);
 				part.Play();
 				Globals.me.checkpoint = ID;
